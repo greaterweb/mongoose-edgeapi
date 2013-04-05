@@ -1,0 +1,18 @@
+# Ignore hidden folders
+.*/
+
+# Ignore Node Modules src
+node_modules
+
+# Keep Mac OS stuff out of the project
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
