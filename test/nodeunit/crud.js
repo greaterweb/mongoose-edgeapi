@@ -27,7 +27,6 @@ exports.crud = {
     tearDown: function (callback) {
         var config = this;
         config.db.close(function() {
-            // console.log('\nMongooose connection closed.');
             callback();
         });
     },
