@@ -535,7 +535,7 @@ exports.config = {
                     }
 
                     var last = _.extend({}, params); // clone params
-                    last.page = meta.pageCount;
+                    last.page = meta.pages;
                     meta.links.last = (path) ? path + '?' + querystring.stringify(last) : last;
 
                     deferred.resolve(meta);
