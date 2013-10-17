@@ -1,8 +1,19 @@
 {
-  "title": "Mongoose EdgeAPI",
   "name": "mongoose-edgeapi",
-  "description": "Powerful REST and Web Sockets API for MongoDB collections using Mongoose and Express.",
   "version": "0.1.0",
+  "description": "Powerful REST and Web Sockets API for MongoDB collections using Mongoose and Express.",
+  "homepage": "https://github.com/greaterweb/mongoose-edgeapi",
+  "bugs": "https://github.com/greaterweb/mongoose-edgeapi/issues",
+  "author": {
+    "name": "Ron Edgecomb II",
+    "email": "ron@greaterwebdesign.com",
+    "url": "http://greaterwebdesign.com"
+  },
+  "main": "src/mongoose-edgeapi.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/greaterweb/mongoose-edgeapi.git"
+  },
   "dependencies": {
     "express": "~3.1.0",
     "underscore": "~1.4.4",
@@ -21,7 +32,6 @@
     "nodeunit": "~0.8.0",
     "grunt-contrib-nodeunit": "~0.1.2"
   },
-  "main": "src/mongoose-edgeapi.js",
   "engines": {
     "node": ">=0.8.0"
   }
