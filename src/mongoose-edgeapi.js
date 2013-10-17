@@ -40,9 +40,9 @@ exports.config = {
     queryLimit: 0,
     /**
      * default value for query sorting
-     * @type {String}
+     * @type {Object}
      */
-    querySort: '',
+    querySort: {},
     /**
      * collection of fields to ignore when schema is being processed by getSchemaFields
      * @type {Array}
@@ -292,6 +292,7 @@ exports.config = {
     crud: function (Model) {
 
         var config = this,
+            fields = _.union(config.getSchemaFields(Model.schema), config.getVirtualFields(Model.schema)),
             crud = {};
 
         /**
@@ -337,9 +338,21 @@ exports.config = {
             var deferred = Q.defer();
 
             limit = limit || config.queryLimit;
-            sort = sort || config.querySort,
+            sort = sort,
             projection = projection || {};
             query = crud.Model.find(query, projection);
+
+            if (!sort) {
+                sort = config.querySort;
+            } else {
+                var sortParams = sort.split(',');
+                sort = {};
+                sortParams.forEach(function (param) {
+                    param = param.split(':');
+                    sort[param[0]] = param[1];
+                });
+                sort = config.buildQueryFromParams(sort, fields);
+            }
 
             var offset = config.calculateDocumentOffset(pageNum, limit) || config.queryOffset;
             query
