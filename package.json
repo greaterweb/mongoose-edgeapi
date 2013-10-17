@@ -21,6 +21,7 @@
     "nodeunit": "~0.8.0",
     "grunt-contrib-nodeunit": "~0.1.2"
   },
+  "main": "src/mongoose-edgeapi.js",
   "engines": {
     "node": ">=0.8.0"
   }
