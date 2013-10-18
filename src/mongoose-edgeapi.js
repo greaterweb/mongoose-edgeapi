@@ -798,7 +798,6 @@ exports.serveRoutes = function (app, Model, config) {
             // TODO: Apply this sort of logic in other areas or wrap as helper method
             try {
                 if (req.query._query) {
-                    console.log(req.query._query);
                     // TOOD: no clue why this could be an object, possible bug?
                     var rawQuery = ('string' === typeof req.query._query)?JSON.parse(req.query._query):req.query._query;
                     req.query = _.extend(rawQuery, req.query);
@@ -1004,7 +1003,6 @@ exports.serveRoutes = function (app, Model, config) {
                 // TODO: Apply this sort of logic in other areas or wrap as helper method
                 try {
                     if (req.query._query) {
-                        console.log(req.query._query);
                         // TOOD: no clue why this could be an object, possible bug?
                         var rawQuery = ('string' === typeof req.query._query)?JSON.parse(req.query._query):req.query._query;
                         req.query = _.extend(rawQuery, req.query);
