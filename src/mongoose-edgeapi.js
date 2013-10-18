@@ -999,6 +999,18 @@ exports.serveRoutes = function (app, Model, config) {
          */
         function getDocumentByFields(req, res, next) {
             if (!config.isValidId(req.params.projection)) {
+                // TODO: Apply this sort of logic in other areas or wrap as helper method
+                try {
+                    if (req.query._query) {
+                        var rawQuery = JSON.parse(req.query._query);
+                        req.query = _.extend(rawQuery, req.query);
+                        delete req.query._query;
+                    }
+                } catch (error) {
+                    config.serveError(res, {
+                        message: 'Unable to parese query string as JSON'
+                    });
+                }
                 var params =  _.extend({}, req.query || {}),
                     query = config.buildQueryFromParams(params, fields),
                     limit = req.query.limit,
