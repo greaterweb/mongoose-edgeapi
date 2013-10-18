@@ -798,13 +798,15 @@ exports.serveRoutes = function (app, Model, config) {
             // TODO: Apply this sort of logic in other areas or wrap as helper method
             try {
                 if (req.query._query) {
-                    var rawQuery = JSON.parse(req.query._query);
+                    console.log(req.query._query);
+                    // TOOD: no clue why this could be an object, possible bug?
+                    var rawQuery = ('string' === typeof req.query._query)?JSON.parse(req.query._query):req.query._query;
                     req.query = _.extend(rawQuery, req.query);
                     delete req.query._query;
                 }
             } catch (error) {
                 config.serveError(res, {
-                    message: 'Unable to parese query string as JSON'
+                    message: 'Unable to parse query string as JSON'
                 });
             }
 
@@ -1002,13 +1004,15 @@ exports.serveRoutes = function (app, Model, config) {
                 // TODO: Apply this sort of logic in other areas or wrap as helper method
                 try {
                     if (req.query._query) {
-                        var rawQuery = JSON.parse(req.query._query);
+                        console.log(req.query._query);
+                        // TOOD: no clue why this could be an object, possible bug?
+                        var rawQuery = ('string' === typeof req.query._query)?JSON.parse(req.query._query):req.query._query;
                         req.query = _.extend(rawQuery, req.query);
                         delete req.query._query;
                     }
                 } catch (error) {
                     config.serveError(res, {
-                        message: 'Unable to parese query string as JSON'
+                        message: 'Unable to parse query string as JSON'
                     });
                 }
                 var params =  _.extend({}, req.query || {}),
