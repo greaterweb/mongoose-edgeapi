@@ -338,7 +338,7 @@ exports.config = {
             var deferred = Q.defer();
 
             limit = limit || config.queryLimit;
-            sort = sort,
+            sort = sort;
             projection = projection || {};
             query = crud.Model.find(query, projection);
 
@@ -795,6 +795,19 @@ exports.serveRoutes = function (app, Model, config) {
          * @return {Object}        Q promise resolving to find method response
          */
         function findDocuments(req, res) {
+            // TODO: Apply this sort of logic in other areas or wrap as helper method
+            try {
+                if (req.query._query) {
+                    var rawQuery = JSON.parse(req.query._query);
+                    req.query = _.extend(rawQuery, req.query);
+                    delete req.query._query;
+                }
+            } catch (error) {
+                config.serveError(res, {
+                    message: 'Unable to parese query string as JSON'
+                });
+            }
+
             var params =  _.extend({}, req.query || {}),
                 query = config.buildQueryFromParams(params, fields),
                 limit = req.query.limit,
