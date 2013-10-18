@@ -1058,6 +1058,10 @@ exports.serveRoutes = function (app, Model, config) {
             var params = _.extend(req.query || {}, req.body || {});
             var document = config.buildQueryFromParams(params, fields);
 
+            // TODO: quick fix to eliminate Modon_idnotallowed error, need to examine if _id and id should be excluded from fields
+            delete document._id;
+            delete document.id;
+
             var update = crud.update({ _id: req.params.id}, document);
             update.then(
                 function onFulfilled(update) {
